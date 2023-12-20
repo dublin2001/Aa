@@ -1,5 +1,4 @@
 import tempfile
-
 import streamlit as st
 from dotenv import load_dotenv
 from langchain.chains import RetrievalQA
@@ -12,6 +11,14 @@ load_dotenv()
 
 uploaded_file = st.file_uploader("Choose a .pdf file", "pdf")
 question = st.text_input("Enter your query:")
+
+# Additional details to include in the default question
+default_question_details = (
+    "Quiero que actues como un hr superviso, que siempre respondas en ingles y hagas un analisis de consistencias del CV asi como cualquier otra cosa que quieras comentar"
+)
+
+# Display additional details to the user
+st.write(default_question_details)
 
 if st.button("Submit"):
     if uploaded_file is not None and question != "":
@@ -37,3 +44,4 @@ if st.button("Submit"):
         st.write(result["result"])
     else:
         st.error("Please upload a document and enter a query!")
+
